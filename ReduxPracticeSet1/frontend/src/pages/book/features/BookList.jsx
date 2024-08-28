@@ -15,7 +15,9 @@ const BookList = ({ books }) => {
       <div className="d-flex col-md-6 justify-content-between">
         <p className="fs-2 fw-bold">Book List</p>
         <button className="btn btn-primary h-50 mt-3">
-          <Link to="bookForm">Add Book</Link>
+          <Link to="/bookForm" className="nav-link">
+            Add Book
+          </Link>
         </button>
       </div>
       <div className="col-md-6">
@@ -35,7 +37,10 @@ const BookList = ({ books }) => {
                 </p>
                 <div>
                   <button className="btn btn-primary">
-                    <Link to="/bookForm" state={{ isEdit: true, id: book._id }}>
+                    <Link
+                      to="/bookForm"
+                      className="nav-link"
+                      state={{ isEdit: true, id: book._id }}>
                       Edit
                     </Link>
                   </button>

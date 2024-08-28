@@ -6,16 +6,12 @@ import BookForm from "./pages/book/features/BookForm";
 
 const App = () => {
   return (
-    <>
-      <Books />
-
-      <Router>
-        <Routes>
-          <Route path="/" to={<Books />} />
-          <Route path="/bookFrom" to={<BookForm />} />
-        </Routes>
-      </Router>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Books />} />
+        <Route path="/bookForm" element={<BookForm />} />
+      </Routes>
+    </Router>
   );
 };
 
