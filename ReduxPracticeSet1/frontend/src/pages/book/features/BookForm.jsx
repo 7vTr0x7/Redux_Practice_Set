@@ -73,12 +73,12 @@ const BookForm = () => {
             onChange={(e) => setAuthor(e.target.value)}
             placeholder="Author"
           />
-          <textarea
+          <input
             className="form-control mt-2"
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
             placeholder="Genre"
-            rows={4}></textarea>
+          />
 
           <button
             className="btn btn-primary mt-3"
