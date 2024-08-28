@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { addBook, updateBook } from "../bookSlice";
+import {
+  addBook,
+  addBookAsync,
+  fetchBooks,
+  updateBook,
+  updateBookAsync,
+} from "../bookSlice";
 import { useDispatch } from "react-redux";
 
 const BookForm = () => {
@@ -28,19 +34,23 @@ const BookForm = () => {
     e.preventDefault();
 
     if ((title, author, summary)) {
-      const bookId = id ? id : Math.floor(Math.random() * 10);
-
       const newBook = {
-        _id: bookId,
         title,
         author,
         summary,
       };
       if (isEdit) {
-        dispatch(updateBook({ id, book: newBook }));
+        dispatch(updateBookAsync({ id, book: newBook })).then(() => {
+          dispatch(fetchBooks()).then(() => {
+            navigate("/");
+          });
+        });
       } else {
-        dispatch(addBook(newBook));
-      }
+        dispatch(addBookAsync(newBook)).then(() => {
+          dispatch(fetchBooks()).then(() => {
+            navigate("/");
+          });
+      })
     }
   };
 

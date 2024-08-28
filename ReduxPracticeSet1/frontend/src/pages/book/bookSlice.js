@@ -15,6 +15,66 @@ export const fetchBooks = createAsyncThunk("fetchBooks", async () => {
   }
 });
 
+export const addBookAsync = createAsyncThunk("deleteBook", async (book) => {
+  try {
+    const res = await fetch(`http://localhost:4000/books`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(book),
+    });
+
+    if (!res.ok) {
+      console.log("Failed to get books");
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+export const updateBookAsync = createAsyncThunk(
+  "deleteBook",
+  async ({ id, book }) => {
+    try {
+      const res = await fetch(`http://localhost:4000/books/${id}`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(book),
+      });
+
+      if (!res.ok) {
+        console.log("Failed to get books");
+      }
+
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const deleteBookAsync = createAsyncThunk("deleteBook", async (id) => {
+  try {
+    const res = await fetch(`http://localhost:4000/books/${id}`);
+
+    if (!res.ok) {
+      console.log("Failed to get books");
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 const bookSlice = createSlice({
   name: "books",
   initialState: {
@@ -22,26 +82,7 @@ const bookSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {
-    deleteBook: (state, action) => {
-      return {
-        ...state,
-        books: state.books.filter((book) => book._id !== action.payload),
-      };
-    },
-    addBook: (state, action) => {
-      return {
-        ...state,
-        books: [...state.books, action.payload],
-      };
-    },
-    updateBook: (state, action) => {
-      const index = state.books.findIndex(
-        (book) => book._id == action.payload.id
-      );
-      state.books[index] = action.payload.book;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.pending, (state, action) => {
       state.status = "Loading";
@@ -57,5 +98,4 @@ const bookSlice = createSlice({
   },
 });
 
-export const { deleteBook, addBook, updateBook } = bookSlice.actions;
 export default bookSlice.reducer;

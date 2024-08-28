@@ -1,13 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteBook } from "../bookSlice";
+import { deleteBook, deleteBookAsync, fetchBooks } from "../bookSlice";
 import { Link } from "react-router-dom";
 
 const BookList = ({ books }) => {
   const dispatch = useDispatch();
 
   const deleteHandler = (id) => {
-    dispatch(deleteBook(id));
+    dispatch(deleteBookAsync(id)).then(() => {
+      dispatch(fetchBooks());
+    });
   };
 
   return (
