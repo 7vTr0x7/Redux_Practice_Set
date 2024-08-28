@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { addBook, updateBook } from "../bookSlice";
+import { useDispatch } from "react-redux";
 
 const BookForm = () => {
   const [title, setTitle] = useState("");
@@ -7,6 +9,9 @@ const BookForm = () => {
   const [summary, setSummary] = useState("");
 
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { isEdit, id, books } = location.state || {};
 
   useEffect(() => {
@@ -22,11 +27,26 @@ const BookForm = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    const newBook = {
-      title,
-      author,
-      summary,
-    };
+    if ((title, author, summary)) {
+      const bookId = id ? id : Math.floor(Math.random() * 10);
+
+      const newBook = {
+        _id: bookId,
+        title,
+        author,
+        summary,
+      };
+      if (isEdit) {
+        dispatch(updateBook({ id, book: newBook }));
+      } else {
+        dispatch(addBook(newBook));
+      }
+    }
+  };
+
+  const cancelHandler = (e) => {
+    e.preventDefault();
+    navigate("/");
   };
 
   return (
@@ -58,6 +78,9 @@ const BookForm = () => {
             type="submit"
             onClick={submitHandler}>
             {isEdit ? "Edit" : "Add"}
+          </button>
+          <button className="btn btn-danger mt-3 mx-3" onClick={cancelHandler}>
+            Cancel
           </button>
         </form>
       </div>
