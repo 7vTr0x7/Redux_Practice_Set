@@ -6,7 +6,7 @@ import { addBookAsync, fetchBooks, updateBookAsync } from "../bookSlice";
 const BookForm = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [summary, setSummary] = useState("");
+  const [genre, setGenre] = useState("");
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const BookForm = () => {
       if (selected) {
         setAuthor(selected.author || "");
         setTitle(selected.title || "");
-        setSummary(selected.summary || "");
+        setGenre(selected.genre || "");
       }
     }
   }, [books, isEdit, id]);
@@ -29,11 +29,11 @@ const BookForm = () => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if ((title, author, summary)) {
+    if ((title, author, genre)) {
       const newBook = {
         title,
         author,
-        summary,
+        genre,
       };
       if (isEdit) {
         dispatch(updateBookAsync({ id, book: newBook })).then(() => {
@@ -75,9 +75,9 @@ const BookForm = () => {
           />
           <textarea
             className="form-control mt-2"
-            value={summary}
-            onChange={(e) => setSummary(e.target.value)}
-            placeholder="Summary"
+            value={genre}
+            onChange={(e) => setGenre(e.target.value)}
+            placeholder="Genre"
             rows={4}></textarea>
 
           <button

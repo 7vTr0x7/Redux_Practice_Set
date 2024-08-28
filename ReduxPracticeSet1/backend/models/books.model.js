@@ -4,7 +4,6 @@ const bookSchema = new mongoose.Schema({
   title: String,
   author: String,
   genre: String,
-  summary: String,
 });
 
 const Books = mongoose.model("Books", bookSchema);
