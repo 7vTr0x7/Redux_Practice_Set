@@ -1,7 +1,8 @@
 import React from "react";
 
 const BookList = ({ books }) => {
-  console.log(books);
+  const deleteHandler = () => {};
+
   return (
     <>
       <p className="fs-2 fw-bold">Book List</p>
@@ -16,6 +17,11 @@ const BookList = ({ books }) => {
                 <p>
                   <b>Author:</b> {book.author}
                 </p>
+                <button
+                  onClick={deleteHandler}
+                  className="btn btn-danger float-end mx-2">
+                  Delete
+                </button>
                 <p>
                   <b>Summary:</b> {book.summary}
                 </p>
