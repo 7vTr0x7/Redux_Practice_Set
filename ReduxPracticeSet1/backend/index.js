@@ -35,6 +35,21 @@ app.post("/books", async (req, res) => {
   }
 });
 
+app.post("/books/:id", async (req, res) => {
+  const { bookName, author, genre } = req.body;
+
+  try {
+    const bookData = await Books.findByIdAndUpdate(
+      req.params.id,
+      { bookName, author, genre },
+      { new: true }
+    );
+    res.status(201).json(bookData);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 app.delete("/books/:id", async (req, res) => {
   const bookId = req.params.id;
 
