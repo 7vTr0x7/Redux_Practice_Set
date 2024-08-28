@@ -2,7 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const fetchBooks = createAsyncThunk("fetchBooks", async () => {
   try {
-    const res = await fetch("http://localhost:4000/books");
+    const res = await fetch(
+      "https://redux-practice-set-1-backend.vercel.app/books"
+    );
 
     if (!res.ok) {
       console.log("Failed to get books");
@@ -17,13 +19,16 @@ export const fetchBooks = createAsyncThunk("fetchBooks", async () => {
 
 export const addBookAsync = createAsyncThunk("deleteBook", async (book) => {
   try {
-    const res = await fetch(`http://localhost:4000/books`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(book),
-    });
+    const res = await fetch(
+      `https://redux-practice-set-1-backend.vercel.app/books`,
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(book),
+      }
+    );
 
     if (!res.ok) {
       console.log("Failed to get books");
@@ -40,13 +45,16 @@ export const updateBookAsync = createAsyncThunk(
   "deleteBook",
   async ({ id, book }) => {
     try {
-      const res = await fetch(`http://localhost:4000/books/${id}`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(book),
-      });
+      const res = await fetch(
+        `https://redux-practice-set-1-backend.vercel.app/books/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(book),
+        }
+      );
 
       if (!res.ok) {
         console.log("Failed to get books");
@@ -62,9 +70,12 @@ export const updateBookAsync = createAsyncThunk(
 
 export const deleteBookAsync = createAsyncThunk("deleteBook", async (id) => {
   try {
-    const res = await fetch(`http://localhost:4000/books/${id}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `https://redux-practice-set-1-backend.vercel.app/books/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (!res.ok) {
       console.log("Failed to get books");
