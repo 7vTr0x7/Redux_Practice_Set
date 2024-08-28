@@ -22,7 +22,14 @@ const bookSlice = createSlice({
     status: "idle",
     error: null,
   },
-  reducers: {},
+  reducers: {
+    deleteBook: (state, action) => {
+      return {
+        ...state,
+        books: state.books.filter((book) => book._id !== action.payload),
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.pending, (state, action) => {
       state.status = "Loading";
@@ -38,4 +45,5 @@ const bookSlice = createSlice({
   },
 });
 
+export const { deleteBook } = bookSlice.actions;
 export default bookSlice.reducer;

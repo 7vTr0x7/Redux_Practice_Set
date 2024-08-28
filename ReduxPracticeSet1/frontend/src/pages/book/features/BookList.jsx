@@ -1,7 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { deleteBook } from "../bookSlice";
 
 const BookList = ({ books }) => {
-  const deleteHandler = () => {};
+  const dispatch = useDispatch();
+
+  const deleteHandler = (id) => {
+    dispatch(deleteBook(id));
+  };
 
   return (
     <>
@@ -18,7 +24,7 @@ const BookList = ({ books }) => {
                   <b>Author:</b> {book.author}
                 </p>
                 <button
-                  onClick={deleteHandler}
+                  onClick={() => deleteHandler(book._id)}
                   className="btn btn-danger float-end mx-2">
                   Delete
                 </button>
