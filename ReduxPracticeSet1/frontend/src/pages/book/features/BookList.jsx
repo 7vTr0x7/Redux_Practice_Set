@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteBook } from "../bookSlice";
+import { Link } from "react-router-dom";
 
 const BookList = ({ books }) => {
   const dispatch = useDispatch();
@@ -13,7 +14,9 @@ const BookList = ({ books }) => {
     <>
       <div className="d-flex col-md-6 justify-content-between">
         <p className="fs-2 fw-bold">Book List</p>
-        <button className="btn btn-primary h-50 mt-3">Add Book</button>
+        <button className="btn btn-primary h-50 mt-3">
+          <Link to="bookForm">Add Book</Link>
+        </button>
       </div>
       <div className="col-md-6">
         <ul className="list-group">
@@ -31,7 +34,11 @@ const BookList = ({ books }) => {
                   <b>Summary:</b> {book.summary}
                 </p>
                 <div>
-                  <button className="btn btn-primary ">Edit</button>
+                  <button className="btn btn-primary">
+                    <Link to="/bookForm" state={{ isEdit: true, id: book._id }}>
+                      Edit
+                    </Link>
+                  </button>
                   <button
                     onClick={() => deleteHandler(book._id)}
                     className="btn btn-danger mx-3">
