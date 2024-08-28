@@ -35,7 +35,7 @@ const BookList = ({ books }) => {
                 </p>
 
                 <p>
-                  <b>Genre:</b> {book.genre}
+                  <b>Genre:</b> {book.genre.join(", ")}
                 </p>
                 <div>
                   <button className="btn btn-primary">
