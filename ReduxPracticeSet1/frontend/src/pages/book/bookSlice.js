@@ -29,6 +29,18 @@ const bookSlice = createSlice({
         books: state.books.filter((book) => book._id !== action.payload),
       };
     },
+    addBook: (state, action) => {
+      return {
+        ...state,
+        books: [...state.books, action.payload],
+      };
+    },
+    updateBook: (state, action) => {
+      const index = state.books.findIndex(
+        (book) => book._id == action.payload.id
+      );
+      state.books[index] = action.payload.book;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchBooks.pending, (state, action) => {
@@ -45,5 +57,5 @@ const bookSlice = createSlice({
   },
 });
 
-export const { deleteBook } = bookSlice.actions;
+export const { deleteBook, addBook, updateBook } = bookSlice.actions;
 export default bookSlice.reducer;
