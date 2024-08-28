@@ -24,10 +24,10 @@ app.get("/books", async (req, res) => {
 });
 
 app.post("/books", async (req, res) => {
-  const { bookName, author, genre } = req.body;
+  const { title, author, genre, summary } = req.body;
 
   try {
-    const bookData = new Books({ bookName, author, genre });
+    const bookData = new Books({ title, author, summary });
     await bookData.save();
     res.status(201).json(bookData);
   } catch (error) {
@@ -36,12 +36,12 @@ app.post("/books", async (req, res) => {
 });
 
 app.post("/books/:id", async (req, res) => {
-  const { bookName, author, genre } = req.body;
+  const { title, author, genre, summary } = req.body;
 
   try {
     const bookData = await Books.findByIdAndUpdate(
       req.params.id,
-      { bookName, author, genre },
+      { title, author, summary },
       { new: true }
     );
     res.status(201).json(bookData);

@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import {
-  addBook,
-  addBookAsync,
-  fetchBooks,
-  updateBook,
-  updateBookAsync,
-} from "../bookSlice";
 import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { addBookAsync, fetchBooks, updateBookAsync } from "../bookSlice";
 
 const BookForm = () => {
   const [title, setTitle] = useState("");
@@ -50,7 +44,8 @@ const BookForm = () => {
           dispatch(fetchBooks()).then(() => {
             navigate("/");
           });
-      })
+        });
+      }
     }
   };
 
