@@ -13,7 +13,9 @@ const Books = () => {
 
   return (
     <>
-      <div></div>
+      <div>{status === "Loading" && <p>Loading</p>}</div>
+      <div>{error && <p>Error : {error}</p>}</div>
+      <div>{books && books.length > 0}</div>
     </>
   );
 };
