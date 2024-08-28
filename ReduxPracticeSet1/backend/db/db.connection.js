@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ path: "D:/redux/ReduxPracticeSet1/backend/.env" });
 const mongoose = require("mongoose");
 
 const mongoURI = process.env.MONGODB;

@@ -7,7 +7,7 @@ const { Books } = require("./models/books.model");
 
 const corsOptions = {
   origin: "*",
-  Credential: true,
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
