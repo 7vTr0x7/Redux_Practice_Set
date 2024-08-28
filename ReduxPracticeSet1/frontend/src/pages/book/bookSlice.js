@@ -62,7 +62,9 @@ export const updateBookAsync = createAsyncThunk(
 
 export const deleteBookAsync = createAsyncThunk("deleteBook", async (id) => {
   try {
-    const res = await fetch(`http://localhost:4000/books/${id}`);
+    const res = await fetch(`http://localhost:4000/books/${id}`, {
+      method: "DELETE",
+    });
 
     if (!res.ok) {
       console.log("Failed to get books");

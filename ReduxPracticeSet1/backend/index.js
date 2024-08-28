@@ -24,10 +24,8 @@ app.get("/books", async (req, res) => {
 });
 
 app.post("/books", async (req, res) => {
-  const { title, author, genre, summary } = req.body;
-
   try {
-    const bookData = new Books({ title, author, summary });
+    const bookData = new Books(req.body);
     await bookData.save();
     res.status(201).json(bookData);
   } catch (error) {
@@ -36,14 +34,10 @@ app.post("/books", async (req, res) => {
 });
 
 app.post("/books/:id", async (req, res) => {
-  const { title, author, genre, summary } = req.body;
-
   try {
-    const bookData = await Books.findByIdAndUpdate(
-      req.params.id,
-      { title, author, summary },
-      { new: true }
-    );
+    const bookData = await Books.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     res.status(201).json(bookData);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });

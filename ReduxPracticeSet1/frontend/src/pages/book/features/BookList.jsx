@@ -30,7 +30,7 @@ const BookList = ({ books }) => {
             books.map((book) => (
               <li key={book._id} className="list-group-item px-3 py-2">
                 <p>
-                  <b>Name:</b> {book.title}
+                  <b>Title:</b> {book.title}
                 </p>
                 <p>
                   <b>Author:</b> {book.author}

@@ -15,14 +15,16 @@ const BookForm = () => {
   const { isEdit, id, books } = location.state || {};
 
   useEffect(() => {
-    if (isEdit) {
+    if (isEdit && books.length > 0) {
       const selected = books.find((book) => book._id == id);
 
-      setAuthor(selected.author);
-      setTitle(selected.title);
-      setSummary(selected.summary);
+      if (selected) {
+        setAuthor(selected.author || "");
+        setTitle(selected.title || "");
+        setSummary(selected.summary || "");
+      }
     }
-  }, []);
+  }, [books, isEdit, id]);
 
   const submitHandler = (e) => {
     e.preventDefault();
