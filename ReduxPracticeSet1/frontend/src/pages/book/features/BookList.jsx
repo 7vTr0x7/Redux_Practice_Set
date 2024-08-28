@@ -6,8 +6,6 @@ import { deleteBookAsync, fetchBooks } from "../bookSlice";
 const BookList = ({ books }) => {
   const dispatch = useDispatch();
 
-  console.log(books);
-
   const deleteHandler = (id) => {
     dispatch(deleteBookAsync(id)).then(() => {
       dispatch(fetchBooks());
