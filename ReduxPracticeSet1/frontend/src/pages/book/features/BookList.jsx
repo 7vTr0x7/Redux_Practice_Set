@@ -40,7 +40,7 @@ const BookList = ({ books }) => {
                     <Link
                       to="/bookForm"
                       className="nav-link"
-                      state={{ isEdit: true, id: book._id }}>
+                      state={{ isEdit: true, id: book._id, books }}>
                       Edit
                     </Link>
                   </button>
