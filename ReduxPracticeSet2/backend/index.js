@@ -42,6 +42,20 @@ app.get("/movies/:id", async (req, res) => {
   }
 });
 
+app.post("/movies", async (req, res) => {
+  try {
+    const newMovie = new Movies(req.body);
+    const savedMovie = await newMovie.save();
+    if (savedMovie) {
+      res.json(savedMovie);
+    } else {
+      res.status(404).json({ error: "Movie not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: `Failed to add movie ${error}` });
+  }
+});
+
 const PORT = 4000;
 app.listen(PORT, () => {
   console.log(`Server Running on ${PORT}`);
