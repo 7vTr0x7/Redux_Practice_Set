@@ -65,6 +65,32 @@ export const editMovieAsync = createAsyncThunk(
     }
   }
 );
+export const addMovieAsync = createAsyncThunk(
+  "addMovieAsync",
+  async (movie) => {
+    try {
+      const res = await fetch(
+        `https://redux-practice-set-2-backend.vercel.app/movies`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(movie),
+        }
+      );
+
+      if (!res.ok) {
+        console.log("Failed to add movie");
+      }
+
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 const movieSlice = createSlice({
   name: "movies",
