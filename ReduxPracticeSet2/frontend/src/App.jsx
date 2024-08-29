@@ -1,7 +1,12 @@
 import React from "react";
+import MovieView from "./pages/movies/MovieView";
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <MovieView />
+    </>
+  );
 };
 
 export default App;
