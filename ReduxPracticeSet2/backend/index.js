@@ -29,6 +29,19 @@ app.get("/movies", async (req, res) => {
   }
 });
 
+app.get("/movies/:id", async (req, res) => {
+  try {
+    const movie = await Movies.findById(req.params.id);
+    if (movie) {
+      res.json(movie);
+    } else {
+      res.status(404).json({ error: "Movie not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: `Failed to get movie ${error}` });
+  }
+});
+
 const PORT = 4000;
 app.listen(PORT, () => {
   console.log(`Server Running on ${PORT}`);
