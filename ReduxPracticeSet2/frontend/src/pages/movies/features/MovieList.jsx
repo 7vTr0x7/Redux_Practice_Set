@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteMovieAsync, fetchMovies } from "../movieSlice";
+import { Link } from "react-router-dom";
 
 const MovieList = ({ movies }) => {
   const dispatch = useDispatch();
@@ -16,7 +17,11 @@ const MovieList = ({ movies }) => {
       <div>
         <div className="d-flex col-md-6 justify-content-between">
           <p className="fs-2 fw-bold">Movie List</p>
-          <button className="btn btn-primary h-50 mt-3">Add Movie</button>
+          <button className="btn btn-primary h-50 mt-3">
+            <Link to="/movieForm" className="nav-link">
+              Add Movie
+            </Link>
+          </button>
         </div>
         <div className="col-md-6">
           <ul className="list-group">
@@ -35,7 +40,14 @@ const MovieList = ({ movies }) => {
                   {movie.genre.join(", ")}
                 </p>
 
-                <button className="btn btn-primary ">Edit</button>
+                <button className="btn btn-primary ">
+                  <Link
+                    to="/movieForm"
+                    className="nav-link"
+                    state={{ movie, isEdit: true }}>
+                    Edit
+                  </Link>
+                </button>
                 <button
                   className="btn btn-danger mx-3"
                   onClick={() => deleteHandler(movie._id)}>
