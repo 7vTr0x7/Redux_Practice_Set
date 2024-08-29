@@ -17,6 +17,29 @@ export const fetchMovies = createAsyncThunk("fetchMovies", async () => {
   }
 });
 
+export const deleteMovieAsync = createAsyncThunk(
+  "deleteMovieAsync",
+  async (id) => {
+    try {
+      const res = await fetch(
+        `https://redux-practice-set-2-backend.vercel.app/movies/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!res.ok) {
+        console.log("Failed to delete movie");
+      }
+
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 const movieSlice = createSlice({
   name: "movies",
   initialState: {
