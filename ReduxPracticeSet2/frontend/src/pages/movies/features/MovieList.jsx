@@ -4,7 +4,10 @@ const MovieList = ({ movies }) => {
   return (
     <>
       <div>
-        <p className="fs-2 fw-bold">Movie List</p>
+        <div className="d-flex col-md-6 justify-content-between">
+          <p className="fs-2 fw-bold">Movie List</p>
+          <button className="btn btn-primary h-50 mt-3">Add Movie</button>
+        </div>
         <div className="col-md-6">
           <ul className="list-group">
             {movies.map((movie) => (
