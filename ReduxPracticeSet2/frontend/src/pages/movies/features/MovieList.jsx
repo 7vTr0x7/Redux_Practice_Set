@@ -1,6 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { deleteMovieAsync, fetchMovies } from "../movieSlice";
 
 const MovieList = ({ movies }) => {
+  const dispatch = useDispatch();
+
+  const deleteHandler = (id) => {
+    dispatch(deleteMovieAsync(id)).then(() => {
+      dispatch(fetchMovies());
+    });
+  };
+
   return (
     <>
       <div>
@@ -26,7 +36,11 @@ const MovieList = ({ movies }) => {
                 </p>
 
                 <button className="btn btn-primary ">Edit</button>
-                <button className="btn btn-danger mx-3">Delete</button>
+                <button
+                  className="btn btn-danger mx-3"
+                  onClick={() => deleteHandler(movie._id)}>
+                  Delete
+                </button>
               </li>
             ))}
           </ul>
