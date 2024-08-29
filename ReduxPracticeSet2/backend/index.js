@@ -56,6 +56,21 @@ app.post("/movies", async (req, res) => {
   }
 });
 
+app.post("/movies/:id", async (req, res) => {
+  try {
+    const movie = await Movies.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (movie) {
+      res.json(movie);
+    } else {
+      res.status(404).json({ error: "Movie not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: `Failed to add movie ${error}` });
+  }
+});
+
 const PORT = 4000;
 app.listen(PORT, () => {
   console.log(`Server Running on ${PORT}`);
